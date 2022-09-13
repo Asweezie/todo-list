@@ -1,0 +1,30 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/1fe00e44bc.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <title>To Do List</title>
+</head>
+<body>
+    <h1>To-Do List</h1>
+    <form action="/addEvent" method="POST">
+        <input type="text" placeholder="Add To Do" name="event">
+        <button type="submit">Add</button>
+    </form>
+    <ul class="events">
+        <% for (let i = 0; i < events.length; i++) { %>
+            <li class="events">
+                <% if (events[i].completed == 'true') { %>
+                <span class="completed"><%= events[i].event %></span>
+                <% } else { %>
+                <span><%= events[i].event %></span>
+              <%  } %>
+                <i class="fa-solid fa-trash"></i>
+            </li>
+        <% } %>
+    </ul>
+    <script src="js/index.js"></script>
+</body>
+</html>
