@@ -20,11 +20,13 @@ MongoClient.connect(dbConnectionString, (err, client) => {
     app.use(express.json())
     
 
-    app.get('/', (req, res) => {
+    app.get('/', async (req, res) => {
         
-        db.collection('events').find().toArray()
+        const todoItems = eventsCollection.find().toArray()
+        const itemsLeft = await eventsCollection.countDocuments({completed: 'false'})
+        todoItems
         .then(results => {
-            res.render('index.ejs', {events: results})
+            res.render('index.ejs', {events: results, remaining: itemsLeft})
         })
         .catch(error => console.error(error))
     })
