@@ -1,10 +1,13 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express();
-const MongoClient = require('mongodb').MongoClient
+const MongoClient = require('mongodb').MongoClient 
 const PORT = 8000;
+require('dotenv').config()
 
-MongoClient.connect('mongodb+srv://awnnlol:passwordz123@cluster0.go9pe2u.mongodb.net/?retryWrites=true&w=majority', (err, client) => {
+let dbConnectionString = process.env.DB_STRING
+
+MongoClient.connect(dbConnectionString, (err, client) => {
     if (err) return console.error(err)
     console.log('Connected to Database')
 
